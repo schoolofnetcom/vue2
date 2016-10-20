@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>vue2</title>
+</head>
+<body>
+<div id="app" class="container">
+    <div class="row">
+        <h3>Campeonato Brasileiro - Série A - 2016</h3>
+        <a class="btn btn-primary" @click="createNovoJogo">Novo jogo</a>
+        <br/><br/>
+        <div v-if="view == 'tabela'">
+            <input type="text" class="form-control" v-model="filter">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th v-for="coluna in colunas">
+                        <a href="#" @click.prevent="sortBy(coluna)">{{coluna | ucwords}}</a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="time in timesFiltered">
+                        <td>
+                            <img :src="time.escudo" style="height: 30px; width: 30px;">
+                            <strong>{{time.nome}}</strong>
+                        </td>
+                        <td>{{time.pontos}}</td>
+                        <td>{{time.gm}}</td>
+                        <td>{{time.gs}}</td>
+                        <td>{{time | saldo}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--<div v-if="view == 'novojogo'">-->
+        <div v-else>
+            <form class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control" v-model="novoJogo.casa.gols" @keyup.enter="fimJogo">
+                    <label class="control-label">
+                        {{novoJogo.casa.time.nome}}
+                        <img :src="novoJogo.casa.time.escudo" style="height: 30px; width: 30px;">
+                    </label>
+                </div>
+                <span>X</span>
+                <div class="form-group">
+                    <label class="control-label">
+                        <img :src="novoJogo.fora.time.escudo" style="height: 30px; width: 30px;">
+                        {{novoJogo.fora.time.nome}}
+                    </label>
+                    <input type="text" class="form-control" v-model="novoJogo.fora.gols">
+                </div>
+                <button type="button" class="btn btn-primary" @click="fimJogo">Fim de jogo</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/dist/build.js"></script>
+</body>
+</html>
