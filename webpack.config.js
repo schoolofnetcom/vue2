@@ -19,19 +19,19 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file',
+        loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]'
         }
       },
       {
         test: /\.(woff|woff2|ttf|svg|eot)$/,
-        loader: 'url'
+        loader: 'url-loader'
       }
     ]
   },
